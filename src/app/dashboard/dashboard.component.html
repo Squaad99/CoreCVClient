@@ -1,0 +1,105 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-lg-5" id="leftPanel">
+
+      <input type="text" id="searchField" name="search" [(ngModel)]="filter">
+
+      <div id="table-wrapper">
+        <div id="table-scroll">
+      <table class="table_overflow">
+        <thead>
+        <tr>
+          <th class="col1">First Name</th>
+          <th class="col2">Last Name</th>
+          <th class="col3">Email</th>
+          <th class="col4" (click)="sort('added')">added<span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+          <th class="col5">More Info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cv of cvs | orderBy: key : reverse | filter:filter;">
+          <td class="col1">{{cv.firstName}}</td>
+          <td class="col2">{{cv.lastName}}</td>
+          <td class="col3">{{cv.email}}</td>
+          <td class="col4">{{cv.added}}</td>
+          <td class="col5"><button>-></button></td>
+        </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="col-lg-5" id="rightPanel">
+
+      <div class="row">
+
+      <div class="col-lg-6" id="leftTopGrid">
+        <label class="infoLabel">FirstName</label>
+        <label class="infoLabel">LastName</label>
+        <label class="infoLabel">Address</label>
+        <label class="infoLabel">Email</label>
+        <label class="infoLabel">Phone</label>
+        <label class="infoLabel">Title</label>
+        <label class="infoLabel">Added</label>
+      </div>
+      <div class="col-lg-6" id="rightTopGrid">
+        <img src="../assets/res/profilepic.png" class="profileImage">
+      </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-6">
+
+          <table class="table_overflow" id="table2">
+            <thead>
+            <tr>
+              <th class="col1">Språk</th>
+              <th class="col2">Period</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+
+        </div>
+        <div class="col-lg-6">
+
+          <table class="table_overflow" id="table3">
+            <thead>
+            <tr>
+              <th class="col1">Skola</th>
+              <th class="col2">Period</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <label>Kommentar</label>
+          <textarea style="width: 100%; height: 15vh">Hejsan</textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <button>PDF</button>
+          <button>PDF</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

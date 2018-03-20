@@ -1,0 +1,102 @@
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10" style="min-height: 90vh;">
+      <div class="row">
+        <div class="col-md-4" style="min-height: 30vh">
+          <h1 class="mb-2">Add new skill</h1>
+
+
+          <form (ngSubmit)="submitSkill()" #skillForm="ngForm">
+            <input class="form-control mb-2" type="text" placeholder="Skill name" name="name" #name="ngModel"
+                   [(ngModel)]="model.name" required minlength="2">
+            <select class="form-control mb-2" name="type" #type="ngModel" [(ngModel)]="model.type" required
+                    minlength="1">
+              <option selected="selected" value="1">System</option>
+              <option value="2">Language</option>
+              <option value="3">Dev</option>
+              <option value="4">Bla</option>
+              <option value="5">Bla</option>
+            </select>
+            <button class="btn btn-primary" [disabled]="!skillForm.valid" type="submit">Add</button>
+          </form>
+        </div>
+
+        <div class="col-md-4" style="min-height: 30vh">
+          <app-title-settings></app-title-settings>
+
+        </div>
+
+
+        <div class="col-md-4" style="min-height: 30vh"></div>
+      </div>
+
+
+      <div class="row">
+        <div class="col" style="min-height: 30vh">
+
+          <h2>Skill 1</h2>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListOne">{{skill.name}}<span class="btn btn-primary"
+                                                                                               (click)="deleteSkillById(skill)"
+                                                                                               style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col" style="min-height: 30vh">
+
+          <h2>Skill 2</h2>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListTwo">{{skill.name}}<span class="btn btn-primary"
+                                                                                               (click)="deleteSkillById(skill.id)"
+                                                                                               style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col" style="min-height: 30vh">
+
+          <h2>Skill 3</h2>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListThree">{{skill.name}}<span class="btn btn-primary"
+                                                                                                 (click)="deleteSkillById(skill.id)"
+                                                                                                 style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="col" style="min-height: 30vh">
+
+          <h2>Skill 4</h2>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListFour">{{skill.name}}<span class="btn btn-primary"
+                                                                                                (click)="deleteSkillById(skill.id)"
+                                                                                                style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col" style="min-height: 30vh">
+
+          <h2>Skill 5</h2>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListFive">{{skill.name}}<span class="btn btn-primary"
+                                                                                                (click)="deleteSkillById(skill.id)"
+                                                                                                style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-1"></div>
+  </div>
+
+
+</div>

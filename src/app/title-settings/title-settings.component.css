@@ -1,0 +1,11 @@
+.titleList{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 12vh;
+  border: 1px lightgrey solid;
+}
+
+.titleListItem{
+  font-size: 12pt;
+  padding: 1vh;
+}

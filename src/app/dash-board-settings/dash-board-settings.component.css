@@ -1,0 +1,7 @@
+.skillList{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 50vh;
+  border: 1px lightgrey solid;
+}
+

@@ -1,0 +1,384 @@
+<form id="CVForm" (ngSubmit)="submitCv()" #cvForm="ngForm">
+
+  <label class="header">Submit CV</label>
+
+  <img class="logoPicture" src="./assets/res/logo.png">
+
+  <label class="subHeader">Personal Info</label>
+
+
+  <div class="form-group">
+    <label for="firstName">First Name*</label>
+    <input type="text" class="form-control" id="firstName" name="firstName" #firstName="ngModel"
+           [(ngModel)]="model.firstName" required minlength="2">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name*</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" #lastName="ngModel"
+           [(ngModel)]="model.lastName" required minlength="2">
+  </div>
+
+  <div class="form-group">
+    <label for="birthYear">Birth Year*</label>
+    <select class="form-control" id="birthYear" name="birthYear" #birthYear="ngModel" [(ngModel)]="model.birthYear"
+            required minlength="1">
+      <option>1993</option>
+      <option>1994</option>
+      <option>1995</option>
+      <option>1996</option>
+      <option>1997</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail">Email*</label>
+    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" #email="ngModel"
+           [(ngModel)]="model.email" required minlength="2">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address*</label>
+    <input type="text" class="form-control" id="address" name="address" #cvAddress="ngModel"
+           [(ngModel)]="model.cvAddress" required minlength="2">
+  </div>
+
+  <div class="form-group">
+    <label>Country*</label>
+    <app-select-country></app-select-country>
+  </div>
+
+  <div class="form-group">
+    <label>City*</label>
+    <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]="model.city" required minlength="2">
+  </div>
+
+  <div class="form-group">
+    <label>Zip Code*</label>
+    <input type="text" class="form-control" name="zipCode" #zipCode="ngModel" [(ngModel)]="model.zipCode" required
+           minlength="2">
+  </div>
+
+  <div class="form-group">
+    <label>Phone*</label>
+    <input type="email" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="model.phone" required
+           minlength="2">
+  </div>
+
+  <!--<form>
+    <div class="form-group">
+      <label>Personal Picture</label>
+      <input type="file" class="form-control-file" name="picturePath" #picturePath="ngModel" [(ngModel)]="model.picturePath" required minlength="1">
+    </div>
+  </form>-->
+
+
+  <div class="form-group">
+    <label class="subHeader">Title*</label>
+    <select class="form-control" name="title" #title="ngModel" [(ngModel)]="model.title" required minlength="1">
+      <option *ngFor="let title of fullTitleList">{{title.name}}</option>
+    </select>
+  </div>
+
+  <label class="subHeader">Background</label>
+
+  <div class="form-group">
+    <a class="btn btn-success btn-lg btn-block" data-toggle="collapse" href="#skillOne" aria-expanded="false"
+       aria-controls="skillOne">Skill 1</a>
+    <div class="collapse" id="skillOne">
+      <div class="card card-block">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>1-3 years</th>
+            <th>3-5 years</th>
+            <th>5+ years</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill1 of skillListOne; let indexCount = index">
+            <th scope="row">
+              <div class="form-check"><input type="checkbox" class="form-check-input"
+                                             [checked]="skillListOne[indexCount].selected"
+                                             (change)="skillListOne[indexCount].selected = !skillListOne[indexCount].selected"><label>{{skill1.name}}</label>
+              </div>
+            </th>
+            <td><input type="radio" name="optionsSkill{{skill1.id}}" *ngIf="skillListOne[indexCount].selected" [checked]="skillListOne[indexCount].exp1"
+                       (change)="skillListOne[indexCount].exp1 = !skillListOne[indexCount].exp1"></td>
+            <td><input type="radio" name="optionsSkill{{skill1.id}}" *ngIf="skillListOne[indexCount].selected" [checked]="skillListOne[indexCount].exp2"
+                       (change)="skillListOne[indexCount].exp2 = !skillListOne[indexCount].exp2"></td>
+            <td><input type="radio" name="optionsSkill{{skill1.id}}" *ngIf="skillListOne[indexCount].selected" [checked]="skillListOne[indexCount].exp3"
+                       (change)="skillListOne[indexCount].exp3 = !skillListOne[indexCount].exp3"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <a class="btn btn-success btn-lg btn-block" data-toggle="collapse" href="#skillTwo" aria-expanded="false"
+       aria-controls="skillTwo">Skill 2</a>
+    <div class="collapse" id="skillTwo">
+      <div class="card card-block">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>1-3 years</th>
+            <th>3-5 years</th>
+            <th>5+ years</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill2 of skillListTwo; let indexCount = index">
+            <th scope="row">
+              <div class="form-check"><input type="checkbox" class="form-check-input" [checked]="skillListTwo[indexCount].selected"
+                                             (change)="skillListTwo[indexCount].selected = !skillListTwo[indexCount].selected">{{skill2.name}}</div>
+            </th>
+            <td><input type="radio" name="optionsSkill{{skill2.id}}" *ngIf="skillListTwo[indexCount].selected" [checked]="skillListTwo[indexCount].exp1"
+                       (change)="skillListTwo[indexCount].exp1 = !skillListTwo[indexCount].exp1"></td>
+            <td><input type="radio" name="optionsSkill{{skill2.id}}" *ngIf="skillListTwo[indexCount].selected" [checked]="skillListTwo[indexCount].exp2"
+                       (change)="skillListTwo[indexCount].exp2 = !skillListTwo[indexCount].exp2"></td>
+            <td><input type="radio" name="optionsSkill{{skill2.id}}" *ngIf="skillListTwo[indexCount].selected" [checked]="skillListTwo[indexCount].exp3"
+                       (change)="skillListTwo[indexCount].exp3 = !skillListTwo[indexCount].exp3"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <a class="btn btn-success btn-lg btn-block" data-toggle="collapse" href="#skillThree" aria-expanded="false"
+       aria-controls="skillThree">Skill 3</a>
+    <div class="collapse" id="skillThree">
+      <div class="card card-block">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>1-3 years</th>
+            <th>3-5 years</th>
+            <th>5+ years</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill3 of skillListThree; let indexCount = index">
+            <th scope="row">
+              <div class="form-check"><input type="checkbox" class="form-check-input" [checked]="skillListThree[indexCount].selected"
+                                             (change)="skillListThree[indexCount].selected = !skillListThree[indexCount].selected">{{skill3.name}}</div>
+            </th>
+            <td><input type="radio" name="optionsSkill{{skill3.id}}" *ngIf="skillListThree[indexCount].selected" [checked]="skillListThree[indexCount].exp1"
+                       (change)="skillListThree[indexCount].exp1 = !skillListThree[indexCount].exp1"></td>
+            <td><input type="radio" name="optionsSkill{{skill3.id}}" *ngIf="skillListThree[indexCount].selected" [checked]="skillListThree[indexCount].exp2"
+                       (change)="skillListThree[indexCount].exp2 = !skillListThree[indexCount].exp2"></td>
+            <td><input type="radio" name="optionsSkill{{skill3.id}}" *ngIf="skillListThree[indexCount].selected" [checked]="skillListThree[indexCount].exp3"
+                       (change)="skillListThree[indexCount].exp3 = !skillListThree[indexCount].exp3"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <a class="btn btn-success btn-lg btn-block" data-toggle="collapse" href="#skillFour" aria-expanded="false"
+       aria-controls="skillFour">Skill 4</a>
+    <div class="collapse" id="skillFour">
+      <div class="card card-block">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>1-3 years</th>
+            <th>3-5 years</th>
+            <th>5+ years</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill4 of skillListFour; let indexCount = index">
+            <th scope="row">
+              <div class="form-check"><input type="checkbox" class="form-check-input" [checked]="skillListFour[indexCount].selected"
+                                             (change)="skillListFour[indexCount].selected = !skillListFour[indexCount].selected">{{skill4.name}}</div>
+            </th>
+            <td><input type="radio" name="optionsSkill{{skill4.id}}" *ngIf="skillListFour[indexCount].selected" [checked]="skillListFour[indexCount].exp1"
+                       (change)="skillListFour[indexCount].exp1 = !skillListFour[indexCount].exp1"></td>
+            <td><input type="radio" name="optionsSkill{{skill4.id}}" *ngIf="skillListFour[indexCount].selected" [checked]="skillListFour[indexCount].exp2"
+                       (change)="skillListFour[indexCount].exp2 = !skillListFour[indexCount].exp2"></td>
+            <td><input type="radio" name="optionsSkill{{skill4.id}}" *ngIf="skillListFour[indexCount].selected" [checked]="skillListFour[indexCount].exp3"
+                       (change)="skillListFour[indexCount].exp3 = !skillListFour[indexCount].exp3"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <a class="btn btn-success btn-lg btn-block" data-toggle="collapse" href="#skillFive" aria-expanded="false"
+       aria-controls="skillFive">Skill 5</a>
+    <div class="collapse" id="skillFive">
+
+
+      <div class="card card-block">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>1-3 years</th>
+            <th>3-5 years</th>
+            <th>5+ years</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let skill5 of skillListFive; let indexCount = index">
+            <th scope="row">
+              <div class="form-check"><input type="checkbox" class="form-check-input" [checked]="skillListFive[indexCount].selected"
+                                             (change)="skillListFive[indexCount].selected = !skillListFive[indexCount].selected">{{skill5.name}}</div>
+            </th>
+            <td><input type="radio" name="optionsSkill{{skill5.id}}" *ngIf="skillListFive[indexCount].selected" [checked]="skillListFive[indexCount].exp1"
+                       (change)="skillListFive[indexCount].exp1 = !skillListFive[indexCount].exp1"></td>
+            <td><input type="radio" name="optionsSkill{{skill5.id}}" *ngIf="skillListFive[indexCount].selected" [checked]="skillListFive[indexCount].exp2"
+                       (change)="skillListFive[indexCount].exp2 = !skillListFive[indexCount].exp2"></td>
+            <td><input type="radio" name="optionsSkill{{skill5.id}}" *ngIf="skillListFive[indexCount].selected" [checked]="skillListFive[indexCount].exp3"
+                       (change)="skillListFive[indexCount].exp3 = !skillListFive[indexCount].exp3"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <label class="subHeader">Education
+    <button class="btn btn-success" (click)="addEducation()" style="margin-left: 1vh">+</button>
+  </label>
+
+  <div class="form-group">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let i of educationList; let indexCount = index">
+
+        <span class="btn btn-success" style="float: right" (click)="removeEducation(i)">X</span>
+
+        <div class="row">
+          <label class="minorHeader">Name</label>
+          <input type="text" class="form-control" name="educationProvider{{indexCount}}"
+                 #educationProvider{{indexCount}}="ngModel"
+                 [(ngModel)]="educationList[indexCount].provider">
+        </div>
+
+        <div class="row" style="margin-top: 1vh">
+
+
+          <div class="col-md-1">
+            <label class="minorHeader">Start</label>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" name="educationStart{{indexCount}}" #educationStart{{indexCount}}="ngModel"
+                    [(ngModel)]="educationList[indexCount].start">
+              <option *ngFor="let i of yearValue">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="form"></div>
+          <div class="col-md-1">
+            <label class="minorHeader">End</label>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" name="educationEnd{{indexCount}}" #educationEnd{{indexCount}}="ngModel"
+                    [(ngModel)]="educationList[indexCount].end">
+              <option *ngFor="let i of yearValue">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="minorHeader">Comment</label>
+          <textarea class="form-control" style="min-height: 10vh" name="educationComment{{indexCount}}"
+                    #educationComment{{indexCount}}="ngModel"
+                    [(ngModel)]="educationList[indexCount].comment"></textarea>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <label class="subHeader">Workplaces
+    <button class="btn btn-success" style="margin-left: 1vh" (click)="addWorkplace()">+</button>
+  </label>
+
+  <div class="form-group">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let i of workplaceList; let indexCount = index">
+
+        <span class="btn btn-success" style="float: right" (click)="removeWorkplace(i)">X</span>
+
+        <div class="row">
+          <label class="minorHeader">Name</label>
+          <input type="text" class="form-control" name="workPlaceName{{indexCount}}"
+                 #workPlaceName{{indexCount}}="ngModel"
+                 [(ngModel)]="workplaceList[indexCount].name">
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-2">
+            <label class="minorHeader">Start</label>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" name="workPlaceStart{{indexCount}}" #workPlaceStart{{indexCount}}="ngModel"
+                    [(ngModel)]="workplaceList[indexCount].start">
+              <option *ngFor="let i of yearValue">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-2">
+            <label class="minorHeader">End</label>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" name="workPlaceEnd{{indexCount}}" #workPlaceEnd{{indexCount}}="ngModel"
+                    [(ngModel)]="workplaceList[indexCount].end">
+              <option *ngFor="let i of yearValue">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="minorHeader">Comment</label>
+          <textarea class="form-control" style="min-height: 10vh" name="workPlaceComment{{indexCount}}"
+                    #workPlaceComment{{indexCount}}="ngModel"
+                    [(ngModel)]="workplaceList[indexCount].comment"></textarea>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="form-group">
+    <label class="subHeader">Comment</label>
+    <textarea type="text" class="form-control" style="min-height: 15vh" name="comment" #comment="ngModel"
+              [(ngModel)]="model.comment"></textarea>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="checkBoxTerms">
+    <label class="form-check-label" for="checkBoxTerms"> I herby accept that my personal information will be stored by
+      Work-It</label>
+  </div>
+
+  <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
+
+</form>

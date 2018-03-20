@@ -1,0 +1,10 @@
+<h1 class="mb-2">Add new Title</h1>
+<form (ngSubmit)="submitTitle()" #titleForm="ngForm">
+  <input class="form-control mb-2" type="text" placeholder="Title name" name="title" #title="ngModel" [(ngModel)]="model.name" required minlength="1">
+  <button class="btn btn-primary" type="submit" [disabled]="!titleForm.valid">Add</button>
+</form>
+
+<h2>Titles</h2>
+<ul class="list-group mt-2 titleList">
+  <li class="list-group-item titleListItem" *ngFor="let title of fullTitleList">{{title.name}}<span class="btn btn-primary" (click)="deleteTitleById(title)" style="float: right; font-size: 8pt">X</span></li>
+</ul>
