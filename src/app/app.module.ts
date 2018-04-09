@@ -6,7 +6,6 @@ import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes} from "@angular/router";
 import { AuthguardGuard } from "./authguard.guard";
@@ -22,29 +21,18 @@ import { SelectCountryComponent } from './select-country/select-country.componen
 import { TitleSettingsComponent } from './title-settings/title-settings.component';
 import {TitleSettingsService} from "./title-settings/service/title-settings.service";
 import {CvService} from "./cv-form/service/cv.service";
-
-
+import {DashboardService} from "./dashboard/service/dashboard.service";
+import { InputCounterModule } from 'ng4-input-counter';
+import { AdvanceSearchComponent } from './advance-search/advance-search.component';
 
 
 const appRoutes:Routes = [
-  {
-    path:'login',
-    component:LoginComponent
-  },
-  {
-    path: 'dashboard',
-    canActivate: [AuthguardGuard],
-    component: DashboardComponent
-  },
-  {
-    path: 'dashboard-settings',
-    component: DashBoardSettingsComponent
-  },
-  {
-    path: 'cv-form',
-    component: CvFormComponent
-  },
-  { component: DashBoardSettingsComponent, path: "", pathMatch: "full" },
+  { path: 'login', component:LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'advance-search', component: AdvanceSearchComponent },
+  { path: 'dashboard-settings', component: DashBoardSettingsComponent },
+  { path: 'cv-form', component: CvFormComponent},
+  { component: DashboardComponent, path: "", pathMatch: "full" },
   { component: LoginComponent, path: "**" }
 ]
 
@@ -53,12 +41,12 @@ const appRoutes:Routes = [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    FooterComponent,
     DashboardComponent,
     CvFormComponent,
     DashBoardSettingsComponent,
     SelectCountryComponent,
-    TitleSettingsComponent
+    TitleSettingsComponent,
+    AdvanceSearchComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -66,9 +54,10 @@ const appRoutes:Routes = [
     Ng2SearchPipeModule,
     FormsModule,
     Ng2OrderModule,
-    HttpClientModule
+    HttpClientModule,
+    InputCounterModule.forRoot()
   ],
-  providers: [CvService, SettingServiceService, TitleSettingsService, AuthguardGuard, UserService, HttpModule],
+  providers: [CvService, SettingServiceService, TitleSettingsService, AuthguardGuard, UserService, HttpModule, SelectCountryComponent,DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -6,5 +6,5 @@
 
 <h2>Titles</h2>
 <ul class="list-group mt-2 titleList">
-  <li class="list-group-item titleListItem" *ngFor="let title of fullTitleList">{{title.name}}<span class="btn btn-primary" (click)="deleteTitleById(title)" style="float: right; font-size: 8pt">X</span></li>
+  <li class="list-group-item titleListItem" *ngFor="let title of fullTitleList">{{title.name}}<span class="spanClick" (click)="deleteTitleById(title)">X</span></li>
 </ul>

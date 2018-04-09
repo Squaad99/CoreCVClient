@@ -1,127 +1,47 @@
-#leftPanel{
-  margin-left: 10%;
-  min-height: 500px;
+
+#profileImage{
+  max-height: 20vh;
 }
 
-#searchField{
-  margin-top: 2%;
-  margin-left: 2%;
-
+.infoLabel {
+  display: block;
+  margin-bottom: 0.5vh;
+  margin-top: 0.5vh;
+  font-size: 16px;
+  font-size: 1vw;
 }
 
-#cvTable{
-  margin-top: 2%;
-  margin-left: 2%;
+.skillTable{
+  cursor: context-menu;
 }
 
-#table-wrapper table {
-  width:100%;
-
+.headSort{
+  cursor: pointer;
 }
 
-.tableRow{
-  font-size: 10pt;
-}
+tbody, tr{ display: block; }
 
-.table_overflow{
-  width:100%;
-  font-size:12px;
-}
-
-/* -- OVERFLOW SCROLL START -- */
-.table_overflow thead{
-  background-color:#f9f9f9;
-  border-bottom:#a5a5a5 2px solid;
-}
-.table_overflow tbody {
-  max-height: 70vh;
-  overflow-x:auto;
-  overflow-y:scroll;
-}
-.table_overflow thead, .table_overflow tbody{
-  margin-top: 2%;
-  margin-left: 2%;
-  float:left;
-  width:100%;
-}
-
-.table_overflow tr td, .table_overflow tr th{
-  padding-top:10px;
-  padding-bottom:10px;
-  padding-left:9px;
-}
-
-.table_overflow tr th{ font-size:15pt;}
+tbody{cursor: pointer;
+  font-size: 0.9vw;}
 
 
-.table_overflow tbody tr:nth-of-type(even){
-  background-color:#f9f9f9;
-  border-bottom:#e5e5e5 3px solid;
-}
-
-/* Columns */
-
-.col1 {
-  width: 200px;
-  text-align: left;
-}
-
-.col2 {
-  width: 200px;
-}
-
-.col3 {
-  width: 200px;
-}
-
-.col4 {
-  width: 200px;
-}
-
-.col5 {
-  width: 200px;
-  text-align: center;
+tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
 }
 
 
-
-.infoLabel{
-  display:block;
-
+tbody {
+  overflow-y: auto;
 }
 
-.col-lg-6{
-  margin-top: 5%;
-}
-
-#leftTopGrid{
-  height: 30vh;
-  padding-left: 10%;
-  padding-top: 5%;
-}
-
-#rightTopGrid{
-  height: 30vh;
-}
-
-.profileImage{
-  margin-top: 5%;
-  margin-left: 10%;
-  border: black 1px solid;
-  position: absolute;
+tbody td, thead th {
   float: left;
 }
 
-#table2{
-  height: 25vh;
-  border: black 1px solid;
-}
 
-#table3{
-  height: 25vh;
-  border: black 1px solid;
-}
 
-thead>tr>th {
-  cursor: pointer;
-}
+
+

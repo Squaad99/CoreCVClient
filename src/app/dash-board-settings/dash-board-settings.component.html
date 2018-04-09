@@ -1,8 +1,9 @@
-<div>
-  <div class="row">
-    <div class="col-md-1"></div>
 
-    <div class="col-md-10" style="min-height: 90vh;">
+<app-header></app-header>
+
+  <div class="row">
+
+    <div class="col-md-12 m-2" style="min-height: 90vh;">
       <div class="row">
         <div class="col-md-4" style="min-height: 30vh">
           <h1 class="mb-2">Add new skill</h1>
@@ -13,11 +14,14 @@
                    [(ngModel)]="model.name" required minlength="2">
             <select class="form-control mb-2" name="type" #type="ngModel" [(ngModel)]="model.type" required
                     minlength="1">
-              <option selected="selected" value="1">System</option>
-              <option value="2">Language</option>
-              <option value="3">Dev</option>
-              <option value="4">Bla</option>
-              <option value="5">Bla</option>
+              <option selected="selected" value="1">Development</option>
+              <option value="2">Database</option>
+              <option value="3">Operating System</option>
+              <option value="4">Network</option>
+              <option value="5">Server Applications</option>
+              <option value="6">Client Software</option>
+              <option value="7">Backup</option>
+              <option value="8">Hardware</option>
             </select>
             <button class="btn btn-primary" [disabled]="!skillForm.valid" type="submit">Add</button>
           </form>
@@ -25,42 +29,38 @@
 
         <div class="col-md-4" style="min-height: 30vh">
           <app-title-settings></app-title-settings>
-
         </div>
-
 
         <div class="col-md-4" style="min-height: 30vh"></div>
       </div>
 
 
-      <div class="row">
-        <div class="col" style="min-height: 30vh">
+      <div class="row ml-1">
+        <div class="skillCol">
 
-          <h2>Skill 1</h2>
-          <ul class="list-group skillList">
-            <li class="list-group-item" *ngFor="let skill of skillListOne">{{skill.name}}<span class="btn btn-primary"
-                                                                                               (click)="deleteSkillById(skill)"
-                                                                                               style="float: right">X</span>
+          <h6>Development</h6>
+          <ul class="list-group skillList mt--1">
+            <li class="list-group-item" *ngFor="let skill of skillListOne">{{skill.name}}<span class="spanClick" (click)="deleteSkillById(skill)">X</span>
             </li>
           </ul>
 
         </div>
-        <div class="col" style="min-height: 30vh">
+        <div class="skillCol">
 
-          <h2>Skill 2</h2>
+          <h6>Database</h6>
           <ul class="list-group skillList">
-            <li class="list-group-item" *ngFor="let skill of skillListTwo">{{skill.name}}<span class="btn btn-primary"
+            <li class="list-group-item" *ngFor="let skill of skillListTwo">{{skill.name}}<span class="spanClick"
                                                                                                (click)="deleteSkillById(skill.id)"
                                                                                                style="float: right">X</span>
             </li>
           </ul>
 
         </div>
-        <div class="col" style="min-height: 30vh">
+        <div class="skillCol">
 
-          <h2>Skill 3</h2>
+          <h6>Operating System</h6>
           <ul class="list-group skillList">
-            <li class="list-group-item" *ngFor="let skill of skillListThree">{{skill.name}}<span class="btn btn-primary"
+            <li class="list-group-item" *ngFor="let skill of skillListThree">{{skill.name}}<span class="spanClick"
                                                                                                  (click)="deleteSkillById(skill.id)"
                                                                                                  style="float: right">X</span>
             </li>
@@ -68,35 +68,66 @@
 
         </div>
 
-        <div class="col" style="min-height: 30vh">
+        <div class="skillCol">
 
-          <h2>Skill 4</h2>
+          <h6>Network</h6>
           <ul class="list-group skillList">
-            <li class="list-group-item" *ngFor="let skill of skillListFour">{{skill.name}}<span class="btn btn-primary"
+            <li class="list-group-item" *ngFor="let skill of skillListFour">{{skill.name}}<span class="spanClick"
                                                                                                 (click)="deleteSkillById(skill.id)"
                                                                                                 style="float: right">X</span>
             </li>
           </ul>
 
         </div>
-        <div class="col" style="min-height: 30vh">
+        <div class="skillCol">
 
-          <h2>Skill 5</h2>
+          <h6>Server Applications</h6>
           <ul class="list-group skillList">
-            <li class="list-group-item" *ngFor="let skill of skillListFive">{{skill.name}}<span class="btn btn-primary"
+            <li class="list-group-item" *ngFor="let skill of skillListFive">{{skill.name}}<span class="spanClick"
                                                                                                 (click)="deleteSkillById(skill.id)"
                                                                                                 style="float: right">X</span>
             </li>
           </ul>
 
         </div>
+
+        <div class="skillCol" style="min-height: 30vh">
+
+          <h6>Client Software</h6>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListSix">{{skill.name}}<span class="spanClick"
+                                                                                                (click)="deleteSkillById(skill.id)"
+                                                                                                style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="skillCol" style="min-height: 30vh">
+
+          <h6>Backup</h6>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListSeven">{{skill.name}}<span class="spanClick"
+                                                                                                (click)="deleteSkillById(skill.id)"
+                                                                                                style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="skillCol" style="min-height: 30vh">
+
+          <h6>Hardware</h6>
+          <ul class="list-group skillList">
+            <li class="list-group-item" *ngFor="let skill of skillListEight">{{skill.name}}<span class="spanClick"
+                                                                                                (click)="deleteSkillById(skill.id)"
+                                                                                                style="float: right">X</span>
+            </li>
+          </ul>
+
+        </div>
+
       </div>
-
-
     </div>
-
-    <div class="col-md-1"></div>
   </div>
 
-
-</div>

@@ -3,5 +3,18 @@
   overflow-x: hidden;
   height: 50vh;
   border: 1px lightgrey solid;
+  font-size: 11pt;
+}
+
+.skillCol{
+  margin-top: 2%;
+  width: 11%;
+  margin-left: 1%;
+}
+
+.spanClick{
+  float: right;
+  cursor: pointer;
+  font-size: 11pt;
 }
 

@@ -1,0 +1,73 @@
+.cnt{
+  width: 80vw;
+  height: 50%;
+  margin-top: 10vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+
+.filterBody{
+  max-height: 14.5vh;
+}
+
+.colCustom1{
+  width: 40%;
+}
+
+.colCustom2{
+  width: 15%;
+}
+
+.colCustom3{
+  width: 15%;
+  padding-left: 4%;
+}
+
+.colCustom4{
+  width: 50%;
+}
+
+.colCustom5{
+  width: 25%;
+}
+
+.colCustom6{
+  width: 25%;
+  padding-left: 4%;
+}
+
+.emptyTableDiv{
+  position: absolute;
+
+  max-height: 14.5vh;
+  text-align: center;
+  line-height: 12vh;
+  vertical-align: middle;
+  font-weight: bold;
+  text-shadow: 1px 1px gray;
+}
+
+.clickableSpan{
+  cursor: pointer;
+}
+
+
+tbody, tr{ display: block; }
+
+tbody{font-size: 0.9vw;}
+
+tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+tbody {
+  overflow-y: auto;
+}
+
+tbody td, thead th {
+  float: left;
+}

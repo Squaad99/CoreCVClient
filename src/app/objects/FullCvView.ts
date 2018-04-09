@@ -1,12 +1,11 @@
-import {Education} from "./education";
 import {WorkPlace} from "./workPlace";
 import {Skill} from "./skill";
+import {Education} from "./education";
 
-export interface FullCV {
+export interface FullCvView {
 
   id: number;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   birthYear: number;
   email: string;
   cvAddress: string;
@@ -17,6 +16,7 @@ export interface FullCV {
   imageBase64: string;
   title: string;
   comment: string;
+  posted: string;
 
   educationList:Education[];
   workPlaceList:WorkPlace[];

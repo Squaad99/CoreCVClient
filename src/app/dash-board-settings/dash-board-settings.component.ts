@@ -19,6 +19,9 @@ export class DashBoardSettingsComponent implements OnInit {
   skillListThree: Skill[];
   skillListFour: Skill[];
   skillListFive: Skill[];
+  skillListSix: Skill[];
+  skillListSeven: Skill[];
+  skillListEight: Skill[];
 
 
   constructor(private settingService: SettingServiceService) {
@@ -45,6 +48,9 @@ export class DashBoardSettingsComponent implements OnInit {
       this.skillListThree = [];
       this.skillListFour = [];
       this.skillListFive = [];
+      this.skillListSix = [];
+      this.skillListSeven = [];
+      this.skillListEight = [];
 
       for (let f of this.fullSkillList) {
         if (f.type == 1) {
@@ -57,8 +63,26 @@ export class DashBoardSettingsComponent implements OnInit {
           this.skillListFour.push({id: f.id, name: f.name, type: f.type, selected: false, exp1: false, exp2: false, exp3: false});
         } else if (f.type == 5) {
           this.skillListFive.push({id: f.id, name: f.name, type: f.type, selected: false, exp1: false, exp2: false, exp3: false});
+        } else if (f.type == 6) {
+          this.skillListSix.push({id: f.id, name: f.name, type: f.type, selected: false, exp1: false, exp2: false, exp3: false});
+        } else if (f.type == 7) {
+          this.skillListSeven.push({id: f.id, name: f.name, type: f.type, selected: false, exp1: false, exp2: false, exp3: false});
+        } else if (f.type == 8) {
+          this.skillListEight.push({id: f.id, name: f.name, type: f.type, selected: false, exp1: false, exp2: false, exp3: false});
         }
       }
+
+      this.skillListOne.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListTwo.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListThree.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListFour.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListFive.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListSix.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListSeven.sort((a, b) => a.name.localeCompare(b.name));
+      this.skillListEight.sort((a, b) => a.name.localeCompare(b.name));
+
+
+
     }, error => {
       console.log("Error message");
     }, () => {

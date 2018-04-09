@@ -1,6 +1,7 @@
 export interface Education {
 
-  provider: string;
+  id: number;
+  name: string;
   start: string;
   end: string;
   comment: string;
