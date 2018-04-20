@@ -37,12 +37,9 @@
         <tbody class="filterBody">
         <tr *ngFor="let skill of fullSkillList | filter : filter; let indexCount = index">
           <td class="colCustom1">{{skill.name}}</td>
-          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}"
-                                        [checked]="fullSkillList[indexCount].exp1" (click)="radioOne(skill)"></td>
-          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}"
-                                        [checked]="fullSkillList[indexCount].exp2" (click)="radioTwo(skill)"></td>
-          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}"
-                                        [checked]="fullSkillList[indexCount].exp3" (click)="radioThree(skill)"></td>
+          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}" [checked]="fullSkillList[indexCount].exp1" (click)="radioOne(skill)"></td>
+          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}" [checked]="fullSkillList[indexCount].exp2" (click)="radioTwo(skill)"></td>
+          <td class="colCustom3"><input type="radio" name="optionsSkill{{skill.id}}" [checked]="fullSkillList[indexCount].exp3" (click)="radioThree(skill)"></td>
           <td class="colCustom3"><span (click)="addSkillToFilter(skill, indexCount)" class="clickableSpan">+</span></td>
         </tr>
         </tbody>
@@ -51,7 +48,7 @@
     </div>
 
     <div class="col-5">
-      
+
 
 
       <table class="table table-sm border table-hover">
@@ -68,11 +65,12 @@
 
         <tr *ngFor="let skill of filterSkillList; let indexCount = index" class="clickableRow">
           <td class="colCustom4">{{skill.name}}</td>
-          <td class="colCustom6"><label *ngIf="skill.exp1">1-3</label><label *ngIf="skill.exp2">3-5</label><label
-            *ngIf="skill.exp3">5+</label></td>
+          <td class="colCustom6"><label *ngIf="skill.exp1">1-3</label><label *ngIf="skill.exp2">3-5</label><label *ngIf="skill.exp3">5+</label></td>
           <td class="colCustom6"><span class="clickableSpan" (click)="removeSkillFromFilter(skill, indexCount)">X</span>
           </td>
         </tr>
+
+        <tr class="emptyTableDiv border" *ngIf="filterSkillList < 1">Empty</tr>
 
         </tbody>
 

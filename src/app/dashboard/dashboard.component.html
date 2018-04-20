@@ -1,14 +1,14 @@
 <app-header></app-header>
 
-<div class="container-fluid">
+<div class="container-fluid bg-light">
 
   <div class="row">
 
     <div class="col" style="max-width: 40vw">
 
-      <input type="text" placeholder="Search" [(ngModel)]="filter" class="mt-4 form-control w-25">
+      <input type="text" placeholder="Search" [(ngModel)]="filter" class="mt-2 form-control w-25">
 
-        <table class="table border mt-2 table-hover">
+        <table class="table border mt-1 table-hover bg-white">
           <thead>
           <tr>
             <th style="width: 28%"><span class="headSort" (click)="sortName()">Name</span></th>
@@ -17,7 +17,7 @@
             <th style="width: 20%"><span class="headSort" (click)="sortPosted()">Posted</span></th>
           </tr>
           </thead>
-          <tbody style="height: 75vh">
+          <tbody style="height: 74vh">
           <tr *ngFor="let cv of fullCvList | filter:filter;" (click)="selectedCv(cv)" class="clickable-row">
             <td style="width: 28%">{{cv.fullName}}</td>
             <td style="width: 20%">{{cv.title}}</td>
@@ -28,50 +28,74 @@
         </table>
       </div>
 
-    <div class="col mt-5">
+    <div class="col mt-5 mr-5">
 
-      <div class="row" style="min-height: 35vh">
+      <div class="row border bg-white" style="min-height: 35vh">
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 p-3 mr-4">
+
           <h4>Personal details</h4>
-          <img id="profileImage" *ngIf="cvSelected" [src]="'data:image/jpg;base64,'+model.imageBase64" class="img-thumbnail">
-          <label class="infoLabel">{{model.fullName}}</label>
-          <label class="infoLabel">{{model.birthYear}}</label>
-          <label class="infoLabel">{{model.title}}</label>
-        </div>
-        <div class="col-lg-3">
-          <h4>Contact</h4>
-          <label class="infoLabel">{{model.email}}</label>
-          <label class="infoLabel">{{model.phone}}</label>
-          <label class="infoLabel">{{model.cvAddress}}</label>
-          <label class="infoLabel">{{model.zipCode}}</label>
-          <label class="infoLabel">{{model.city}}</label>
-          <label class="infoLabel">{{model.cvCountry}}</label>
-        </div>
-        <div class="col mt-2 mr-5">
 
-          <table class="table border skillTable mr-5">
+          <div class="form-group mt-2" style="min-height: 16vh">
+          <img id="profileImage" *ngIf="cvSelected" [src]="'data:image/jpg;base64,'+model.imageBase64" class="img-thumbnail">
+          </div>
+
+          <div class="form-group mt-2">
+            <input type="text" class="form-control" placeholder="Name" name="fullName" #fullName="ngModel" [(ngModel)]="model.fullName" style="color: black;" maxlength="50">
+            <input type="number" class="form-control mt-1" placeholder="Birth year" name="birthYear" #birthYear="ngModel" [(ngModel)]="model.birthYear" style="color: black;" maxlength="4">
+            <input type="text" class="form-control mt-1" placeholder="Title" name="title" #title="ngModel" [(ngModel)]="model.title" style="color: black;" maxlength="30">
+          </div>
+
+        </div>
+
+
+        <div class="col-lg-3 pt-3 border-right">
+          <h4>Contact</h4>
+
+          <div class="form-group mt-2">
+            <input type="text" class="form-control" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="model.email" style="color: black;" maxlength="50">
+            <input type="text" class="form-control mt-1" placeholder="Phone"  name="phone" #phone="ngModel" [(ngModel)]="model.phone" style="color: black;" maxlength="16">
+            <input type="text" class="form-control mt-1" placeholder="Address"  name="cvAddress" #cvAddress="ngModel" [(ngModel)]="model.cvAddress" style="color: black;" maxlength="30">
+            <input type="text" class="form-control mt-1" placeholder="Zip code" name="zipCode" #zipCode="ngModel" [(ngModel)]="model.zipCode" style="color: black;" maxlength="50">
+            <input type="text" class="form-control mt-1" placeholder="City" name="city" #city="ngModel" [(ngModel)]="model.city" style="color: black;" maxlength="30">
+            <input type="text" class="form-control mt-1" placeholder="Country" name="cvCountry" #cvCountry="ngModel" [(ngModel)]="model.cvCountry" style="color: black;" maxlength="50">
+          </div>
+
+          <button class="btn btn-primary float-right mb-1" [disabled]="!cvSelected" (click)="updateSelectedCv()">Save</button>
+
+        </div>
+
+
+        <div class="col mt-2  mr-4" style="min-height: 38vh">
+
+          <input type="text" placeholder="Search" [(ngModel)]="filter1" class="mt-1 mr-3 form-control w-25">
+
+          <table class="table border skillTable m-3">
             <thead>
             <tr>
               <th class="text-center w-50">Skill</th>
-              <th class="text-center w-50">Experience</th>
+              <th class="text-center w-50" style="padding-right: 8%">Experience</th>
             </tr>
             </thead>
             <tbody style="max-height: 25vh; cursor: default;">
-            <tr *ngFor="let skill of model.fullSkillList">
+            <tr *ngFor="let skill of model.fullSkillList | filter:filter1">
               <td class="filterable-cell text-center w-50">{{skill.name}}</td>
-              <td class="filterable-cell text-center w-50" *ngIf="skill.exp1">0-3 Years</td>
-              <td class="filterable-cell text-center w-50" *ngIf="skill.exp2">3-5 Years</td>
-              <td class="filterable-cell text-center w-50" *ngIf="skill.exp3">5+ Years</td>
+              <td class="filterable-cell text-center w-50" *ngIf="skill.exp1">{{exp1}}</td>
+              <td class="filterable-cell text-center w-50" *ngIf="skill.exp2">{{exp2}}</td>
+              <td class="filterable-cell text-center w-50" *ngIf="skill.exp3">{{exp3}}</td>
             </tr>
+
+            <tr class="emptyTableDiv1 border" *ngIf="model.fullSkillList < 1">Empty</tr>
+
             </tbody>
           </table>
 
-
         </div>
+
+
       </div>
 
-      <div class="row border mt-5" style="min-height: 35vh">
+      <div class="row border mt-2 bg-white" style="min-height: 35vh">
 
         <div class="container">
 
@@ -90,14 +114,17 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active container" id="home">
-              <textarea class="form-control mt-3" style="min-height: 22vh" name="comment" #comment="ngModel" [(ngModel)]="model.comment" maxlength="500">{{model.comment}}</textarea>
+              <span class="float-right" style="font-size: 14px; margin-top: -2.4%">{{this.ppCharCount}}/500</span>
+              <textarea class="form-control mt-3" style="min-height: 22vh" name="comment" #comment="ngModel" [(ngModel)]="model.comment" (ngModelChange)="setPpCharCount()" maxlength="500">{{model.comment}}</textarea>
               <button class="btn btn-primary mt-2 mb-2" style="float: right" [disabled]="!cvSelected" (click)="updateProfessionalProfile()">Save</button>
             </div>
 
             <div class="tab-pane container" id="menu1">
+
+
               <div class="row">
                 <div class="col">
-                  <table class="table table-hover" style="min-height: 20vh">
+                  <table class="table table-hover">
                     <thead class="border">
                     <tr>
                       <th style="width: 40%">Name</th>
@@ -105,17 +132,21 @@
                       <th style="width: 30%">End</th>
                     </tr>
                     </thead>
-                    <tbody style="min-height: 20vh">
+                    <tbody>
                     <tr *ngFor="let edu of model.educationList" (click)="setSelectedEducation(edu)" class="border">
                       <td style="width: 40%">{{edu.name}}</td>
                       <td style="width: 30%">{{edu.start}}</td>
                       <td style="width: 30%">{{edu.end}}</td>
                     </tr>
+
+                    <tr class="emptyTableDiv2 border" *ngIf="model.educationList < 1">Empty</tr>
+
                     </tbody>
                   </table>
                 </div>
                 <div class="col">
-                  <textarea class="form-control" style="min-height: 22vh" name="eduComment" #eduComment="ngModel" [(ngModel)]="selectedEducation.comment" maxlength="180">{{selectedEducation.comment}}</textarea>
+                  <span class="float-right" style="font-size: 14px;  margin-top: -5%">{{this.eduCharCount}}/500</span>
+                  <textarea class="form-control" style="min-height: 22vh" name="eduComment" #eduComment="ngModel" [(ngModel)]="selectedEducation.comment" (ngModelChange)="setEduCharCount()" maxlength="180">{{selectedEducation.comment}}</textarea>
                   <button class="btn btn-primary float-right mt-2 mb-2" [disabled]="!eduSelected" (click)="updateEduComment()">Save</button>
                 </div>
               </div>
@@ -138,11 +169,15 @@
                 <td style="width: 30%">{{work.start}}</td>
                 <td style="width: 30%">{{work.end}}</td>
               </tr>
+
+              <tr class="emptyTableDiv2 border" *ngIf="model.workPlaceList < 1">Empty</tr>
+
               </tbody>
             </table>
           </div>
           <div class="col">
-            <textarea class="form-control" style="min-height: 22vh" name="workComment" #workComment="ngModel" [(ngModel)]="selectedWorkplace.comment" maxlength="180">{{selectedWorkplace.comment}}</textarea>
+            <span class="float-right" style="font-size: 14px; margin-top: -5%">{{this.workCharCount}}/500</span>
+            <textarea class="form-control" style="min-height: 22vh" name="workComment" #workComment="ngModel" [(ngModel)]="selectedWorkplace.comment" (ngModelChange)="setWorkCharCount()" maxlength="180">{{selectedWorkplace.comment}}</textarea>
             <button class="btn btn-primary float-right mt-2 mb-2" [disabled]="!workSelected" (click)="updateWorkComment()">Save</button>
           </div>
         </div>
@@ -153,7 +188,7 @@
 
       <div class="row">
         <div class="col-lg-12 mt-3">
-          <button class="btn btn-primary float-right mr-2" (click)="deleteCv()" [disabled]="!cvSelected">Delete Cv</button>
+          <button class="btn btn-primary float-right mr-2" (click)="deleteCvPressed()" [disabled]="!cvSelected">Delete Cv</button>
           <button class="btn btn-primary float-right mr-2" (click)="createPDF(model)" [disabled]="!cvSelected">PDF</button>
         </div>
       </div>
@@ -193,7 +228,7 @@
           {{infoModalMessage}}
         </div>
         <div class="modal-footer">
-          <span class="btn btn-primary float-right"  (click)="yesValidation()" data-dismiss="modal">Yes</span>
+          <span class="btn btn-primary float-right"  (click)="deleteCv()" data-dismiss="modal">Yes</span>
           <span class="btn btn-primary float-right" data-dismiss="modal">No</span>
         </div>
       </form>

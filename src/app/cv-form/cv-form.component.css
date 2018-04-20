@@ -1,9 +1,21 @@
+.fullCon{
+  width: 100%;
+  min-width: 1600px;
+  height: 100%;
+  background: lightgrey;
+  padding: 5%;
+}
+
+
 #CVForm{
-  margin-top: 5%;
+
   margin-left: 20%;
   margin-right: 20%;
+  background-color: white;
   width: 60%;
-  border: 3px solid green;
+  min-width: 800px;
+  border: 3px solid black;
+  border-radius: 24px;
   padding: 3% 8%;
 }
 
@@ -20,13 +32,60 @@
 .logoPicture{
   padding-left: 3%;
   padding-top: -2%;
-}
-
-
-#backgroundLabel:hover #tooltip1 {
-  visibility: visible;
+  float: right;
 }
 
 .spanClick{
   cursor: pointer;
 }
+
+.radioButton{
+  margin-left: 2vh;
+}
+
+#eduHeader{
+  position: relative;
+  cursor: pointer;
+}
+
+#eduHeader:hover #toolTipBox1{
+  display: inline-block;
+}
+
+#workHeader{
+  position: relative;
+  cursor: pointer;
+}
+
+#workHeader:hover #toolTipBox2{
+  display: inline-block;
+}
+
+#professionalHeader{
+  position: relative;
+  cursor: pointer;
+}
+
+#professionalHeader:hover #toolTipBox3{
+  display: inline-block;
+}
+
+.toolTipBox{
+  display: none;
+  font-size: 18px;
+  padding: 2%;
+  background-color: white;
+  border: 1px solid green;
+  text-align: center;
+  border-radius: 6px;
+
+  /*Position*/
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0%;
+}
+
+
+
+

@@ -1,6 +1,12 @@
 
+.container-fluid{
+  min-width: 1400px;
+  min-height: 800px;
+  height: 93.5vh;
+}
+
 #profileImage{
-  max-height: 20vh;
+  max-height: 16vh;
 }
 
 .infoLabel {
@@ -10,6 +16,23 @@
   font-size: 16px;
   font-size: 1vw;
 }
+
+.emptyTableDiv1{
+  height: 25vh;
+  text-align: center;
+  line-height: 20vh;
+  font-weight: bold;
+  text-shadow: 1px 1px gray;
+}
+
+.emptyTableDiv2{
+  height: 17vh;
+  text-align: center;
+  line-height: 16vh;
+  font-weight: bold;
+  text-shadow: 1px 1px gray;
+}
+
 
 .skillTable{
   cursor: context-menu;
@@ -22,7 +45,8 @@
 tbody, tr{ display: block; }
 
 tbody{cursor: pointer;
-  font-size: 0.9vw;}
+  font-size: 0.9vw;
+}
 
 
 tr:after {

@@ -1,13 +1,25 @@
-<form (submit)="loginUser($event)">
-  <div class="input">
-    <label>Username</label>
-    <input type="text">
-  </div>
-  <div class="input">
-    <label>Password</label>
-    <input type="password">
-  </div>
-  <div class="input">
-    <input type="submit" value="Login">
-  </div>
-</form>
+<div class="fullCon">
+
+  <form class="loginForm">
+
+
+    <img class="logoPicture" src="./assets/res/logo.png">
+
+
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" name="username" #username="ngModel" [(ngModel)]="model.username">
+    </div>
+
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="model.password">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-success" (click)="login()">Sign in</button>
+    </div>
+
+
+  </form>
+
+
+</div>

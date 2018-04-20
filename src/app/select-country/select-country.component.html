@@ -1,4 +1,4 @@
-<select class="form-control" (change)="sendMessage()" name="country" #country="ngModel" [(ngModel)]="model.country" required>
+<select class="form-control" id="country" name="country" #country="ngModel" [(ngModel)]="model.country" [ngClass]="{'is-invalid' : country.errors && (country.dirty || country.touched), 'is-valid' : !country.errors}" required (change)="sendMessage()">
   <option value="Afghanistan">Afghanistan</option>
   <option value="Albania">Albania</option>
   <option value="Algeria">Algeria</option>

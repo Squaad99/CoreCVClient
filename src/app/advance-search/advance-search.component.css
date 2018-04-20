@@ -38,12 +38,9 @@
 }
 
 .emptyTableDiv{
-  position: absolute;
-
-  max-height: 14.5vh;
+  height: 14.5vh;
   text-align: center;
   line-height: 12vh;
-  vertical-align: middle;
   font-weight: bold;
   text-shadow: 1px 1px gray;
 }

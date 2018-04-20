@@ -26,4 +26,8 @@ export class DashboardService {
     return this.http.put("/api/work", work);
   }
 
+  deleteCvById(cvId: number) {
+    return this.http.delete("/api/cv/" + cvId);
+  }
+
 }

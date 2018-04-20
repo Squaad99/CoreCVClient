@@ -8,6 +8,7 @@ import {WorkPlace} from "../objects/workPlace";
 import {CvService} from "./service/cv.service";
 import {HttpClient} from "@angular/common/http";
 import * as jQuery from 'jquery';
+import {VALUE_EXP1, VALUE_EXP2, VALUE_EXP3} from "../api.values";
 
 declare let $: any;
 
@@ -18,11 +19,16 @@ declare let $: any;
 })
 export class CvFormComponent implements OnInit {
 
+  exp1: String = VALUE_EXP1.value;
+  exp2: String = VALUE_EXP2.value;
+  exp3: String = VALUE_EXP3.value;
+
   model: any = {};
 
   fullTitleList: Title[];
 
-  yearValue = [];
+  birthYearList = [];
+  YearList = [];
 
   fullSkillList: Skill[];
 
@@ -42,25 +48,24 @@ export class CvFormComponent implements OnInit {
   constructor(private http: HttpClient, private titleSettingsService: TitleSettingsService, private settingService: SettingServiceService, private cvService: CvService) {
   }
 
+  currentYear = new Date().getFullYear();
+
   ngOnInit() {
     this.setYearValue();
     this.getAllSkills();
     this.getAllTitles();
   }
-  countrySelected = "";
-
-  receiveMessage($event) {
-    this.countrySelected = $event;
-    console.log("rec: " + this.countrySelected);
-    this.model.cvCountry = this.countrySelected;
-  }
 
   setYearValue() {
     var i;
-    for (i = 0; i < 50; i++) {
-      this.yearValue.push(2018 - i);
+    for (i = 18; i < 100; i++) {
+      this.birthYearList.push(this.currentYear - i);
     }
-    console.log(this.yearValue);
+
+    var x;
+    for (x = 0; x < 60; x++) {
+      this.YearList.push(this.currentYear - x);
+    }
   }
 
   addEducation() {
@@ -335,7 +340,7 @@ export class CvFormComponent implements OnInit {
     for(let skill of this.doneSkillList){
       if(skill.exp1 == false && skill.exp2 == false && skill.exp3 == false){
         this.modalMessage = "Please enter experience for " + skill.name+".";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }
     }
@@ -349,19 +354,19 @@ export class CvFormComponent implements OnInit {
     for(let edu of this.educationList){
       if(edu.name.length < 1){
         this.modalMessage = "Please enter name for education.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(edu.start.length < 1){
         this.modalMessage = "Please enter start for education.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(edu.end.length < 1){
         this.modalMessage = "Please enter end for education.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(edu.start > edu.end){
-        this.modalMessage = "Start year must be before end year for education: " + edu.name;
-        this.showSkillValidationModal();
+        this.modalMessage = "Start year must be earlier than end year, education:" + edu.name;
+        this.showValidationModal();
         return false;
       }
     }
@@ -375,19 +380,19 @@ export class CvFormComponent implements OnInit {
     for(let workplace of this.workplaceList){
       if(workplace.name.length < 1){
         this.modalMessage = "Please enter name for workplace.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(workplace.start.length < 1){
         this.modalMessage = "Please enter start for workplace.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(workplace.end.length < 1){
         this.modalMessage = "Please enter end for workplace.";
-        this.showSkillValidationModal();
+        this.showValidationModal();
         return false;
       }else if(workplace.start > workplace.end){
-        this.modalMessage = "Start year must be before end year for workplace: " + workplace.name;
-        this.showSkillValidationModal();
+        this.modalMessage = "Start year must be earlier than end year, workplace:" + workplace.name;
+        this.showValidationModal();
         return false;
       }
     }
@@ -411,28 +416,41 @@ export class CvFormComponent implements OnInit {
     this.model.educationList = this.educationList;
     this.model.workPlaceList = this.workplaceList;
 
+
     this.cvService.insertFullCv(this.model);
 
     this.modalHeader = "CV submitted!";
     this.modalMessage = "We've received your CV! We at Work-it will be in contact!";
-    this.showSkillValidationModal();
-
-    window.location.href='http://www.work-it.se/';
+    this.showExitModal();
   }
 
   private base64textString: String = '';
 
-  fileFormat: boolean;
+  fileSelected: boolean = false;
+  fileFormat: boolean = true;
+  fileSize: boolean = true;
 
   imageUpload(event) {
+
+    this.fileSelected = true;
 
     const files = event.target.files;
     const file = files[0];
 
-    if(file.type == "image/png" || file.type == "image/jpeg"){
-      this.fileFormat = false;
-    }else {
+    console.log(file);
+
+    if(file.type == "image/jpeg"){
       this.fileFormat = true;
+    }else {
+      this.fileFormat = false;
+      return;
+    }
+
+    if(file.size < 1000000){
+      this.fileSize = true;
+    }else{
+      this.fileSize = false;
+      return;
     }
 
     if (files && file) {
@@ -451,11 +469,42 @@ export class CvFormComponent implements OnInit {
   acceptedTerms: boolean = false;
 
   @ViewChild('validationModal') modal:ElementRef;
-  showSkillValidationModal(){
-    $(this.modal.nativeElement).modal({view: 'show', backdrop: 'static',
+  showValidationModal(){
+    $(this.modal.nativeElement).modal({view: 'show'});
+  }
+
+  @ViewChild('exitModal') modal2:ElementRef;
+  showExitModal(){
+    $(this.modal2.nativeElement).modal({view: 'show', backdrop: 'static',
       keyboard: false});
+  }
+
+  radioOne(skill){
+
+    skill.exp1 = true;
+    skill.exp2 = false;
+    skill.exp3 = false;
 
   }
 
+  radioTwo(skill){
+
+    skill.exp1 = false;
+    skill.exp2 = true;
+    skill.exp3 = false;
+
+  }
+
+  radioThree(skill){
+
+    skill.exp1 = false;
+    skill.exp2 = false;
+    skill.exp3 = true;
+
+  }
+
+  goToWorkIt(){
+    window.location.href='http://www.work-it.se/';
+  }
 
 }
