@@ -1,10 +1,10 @@
-<h1 class="mb-2">Add new Title</h1>
+<h4 class="mb-2">Add new Title</h4>
 <form (ngSubmit)="submitTitle()" #titleForm="ngForm">
   <input class="form-control mb-2" type="text" placeholder="Title name" name="title" #title="ngModel" [(ngModel)]="model.name" required minlength="1">
   <button class="btn btn-primary" type="submit" [disabled]="!titleForm.valid">Add</button>
 </form>
 
-<h2>Titles</h2>
-<ul class="list-group mt-2 titleList">
-  <li class="list-group-item titleListItem" *ngFor="let title of fullTitleList">{{title.name}}<span class="spanClick" (click)="deleteTitleById(title)">X</span></li>
+<h4 class="mt-3">Titles</h4>
+<ul class="list-group mt-2 titleList bg-white">
+  <li class="list-group-item titleListItem" *ngFor="let title of fullTitleList; let indexCount = index">{{title.name}}<span class="spanClick" (click)="deleteTitleById(title, indexCount)">X</span></li>
 </ul>

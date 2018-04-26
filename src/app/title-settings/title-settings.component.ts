@@ -19,25 +19,30 @@ export class TitleSettingsComponent implements OnInit {
   }
 
   submitTitle(){
-    this.titleSettingsService.insertTitle(this.model).subscribe();
-    this.model = {};
-    this.getAllTitles();
+    this.titleSettingsService.insertTitle(this.model).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.getAllTitles();
+      this.model = {};
+    });
   }
 
   getAllTitles(){
     this.titleSettingsService.getAllTitles().subscribe((titles: Title[]) => {
       this.fullTitleList = titles;
     }, error => {
-      console.log("Error message");
+      console.log("Server Error");
     }, () => {
       console.log("Finally message")
     });
   }
 
-  deleteTitleById(title){
-    this.titleSettingsService.deleteTitleById(title.id).subscribe();
-    location.reload();
-    this.getAllTitles();
+  deleteTitleById(title, indexCount){
+    this.titleSettingsService.deleteTitleById(title.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.fullTitleList.splice(indexCount, 1);
+    });
   }
 
 

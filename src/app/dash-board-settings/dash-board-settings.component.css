@@ -13,6 +13,7 @@
 }
 
 .spanClick{
+  user-select: none;
   float: right;
   cursor: pointer;
   font-size: 11pt;

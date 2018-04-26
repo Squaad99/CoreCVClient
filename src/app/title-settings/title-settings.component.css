@@ -1,7 +1,7 @@
 .titleList{
   overflow: scroll;
   overflow-x: hidden;
-  height: 12vh;
+  height: 25vh;
   border: 1px lightgrey solid;
 }
 
@@ -11,6 +11,7 @@
 }
 
 .spanClick{
+  user-select: none;
   float: right;
   cursor: pointer;
   font-size: 11pt;

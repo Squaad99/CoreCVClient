@@ -25,21 +25,23 @@ export class AuthService {
 
   login(user: User): Observable<any> {
     return this.http.post("/login", user, { observe: 'response' }).map(response => {
-
       localStorage.setItem(JWT_TOKEN, response.headers.get('authorization'));
-
-
-
       this.userService.getByUsername(user.username).subscribe((data: User) => {
-        localStorage.setItem(CURRENT_USER, JSON.stringify(data));
+        localStorage.setItem(CURRENT_USER, JSON.stringify(data.username));
         this.setAuthenticatedUser(data);
         this.router.navigate(['dashboard']);
       });
-
-
     }).catch((error: any) => {
       return Observable.throw(error);
     });
+  }
+
+  logout(): void {
+    this.currentUser = null;
+    this.authenticatedUser = new BehaviorSubject<any>(null);
+    localStorage.removeItem(JWT_TOKEN);
+    localStorage.removeItem(CURRENT_USER);
+    this.router.navigate(['AuthenticationPage']);
   }
 
   setAuthenticatedUser(user: User) {

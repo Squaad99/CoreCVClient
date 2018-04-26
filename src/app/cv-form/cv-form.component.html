@@ -753,10 +753,10 @@
 
   <div class="form-group">
     <div class="from-inline mb-1">
-      <label id="professionalHeader" class="subHeader" style="display: inline">Professional profile<span id="toolTipBox3" class="toolTipBox">Professional profile: </span></label> <span class="float-right">{{this.ppLength}}/500</span>
+      <label id="professionalHeader" class="subHeader" style="display: inline">Professional profile<span id="toolTipBox3" class="toolTipBox">Professional profile: </span></label> <span class="float-right">{{this.ppLength}}/1500</span>
     </div>
     <textarea type="text" class="form-control" style="min-height: 15vh" name="comment" #comment="ngModel"
-              [(ngModel)]="model.comment" maxlength="500"
+              [(ngModel)]="model.comment" maxlength="1500"
               (ngModelChange)="setProfessionalProfileLength(model.comment)"></textarea>
 
   </div>
@@ -766,7 +766,10 @@
     <label class="form-check-label" for="checkBoxTerms"> I herby accept that my personal information will be stored by Work-It*</label>
   </div>
 
-  <button type="submit" class="btn btn-success w-100 mt-2" style="font-size: 18pt" [disabled]="!cvForm.valid || !acceptedTerms || (!fileSelected || !fileFormat || !fileSize)">Submit CV</button>
+
+  <span class="bs-tooltip-top w-100" tabindex="0" data-toggle="tooltip" title="You must fill out all fields marked * before you can submit!">
+  <button type="submit" class="btn btn-success w-100 mt-2" style="font-size: 18pt" [disabled]="!cvForm.valid || !acceptedTerms || (!fileSelected || !fileFormat || !fileSize)">Submit</button>
+  </span>
 
 
 

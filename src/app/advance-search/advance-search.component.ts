@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Skill} from "../objects/skill";
 import {SettingServiceService} from "../dash-board-settings/service/setting-service.service";
+import {VALUE_EXP1, VALUE_EXP2, VALUE_EXP3} from "../api.values";
+import {FullCvView} from "../objects/FullCvView";
+import {DashboardService} from "../dashboard/service/dashboard.service";
 
 @Component({
   selector: 'app-advance-search',
@@ -9,16 +12,24 @@ import {SettingServiceService} from "../dash-board-settings/service/setting-serv
 })
 export class AdvanceSearchComponent implements OnInit {
 
+  exp1: String = VALUE_EXP1.value;
+  exp2: String = VALUE_EXP2.value;
+  exp3: String = VALUE_EXP3.value;
+
   fullSkillList: Skill[];
   filterSkillList: Skill[] = [];
 
+  fullCvList: FullCvView[];
+  filteredCvList: FullCvView[];
 
-  constructor(private settingService: SettingServiceService) { }
+  public searchString: string;
 
 
+  constructor(private settingService: SettingServiceService, private dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.getAllSkills();
+    this.getAllCv();
   }
 
   getAllSkills() {
@@ -48,6 +59,8 @@ export class AdvanceSearchComponent implements OnInit {
 
     this.filterSkillList.sort((a, b) => a.name.localeCompare(b.name));
     this.fullSkillList.sort((a, b) => a.name.localeCompare(b.name));
+
+    this.filterCvAfterSkill();
   }
 
   removeSkillFromFilter(skill, i){
@@ -56,8 +69,9 @@ export class AdvanceSearchComponent implements OnInit {
 
     this.filterSkillList.sort((a, b) => a.name.localeCompare(b.name));
     this.fullSkillList.sort((a, b) => a.name.localeCompare(b.name));
-  }
 
+    this.filterCvAfterSkill();
+  }
 
   radioOne(skill){
 
@@ -83,5 +97,51 @@ export class AdvanceSearchComponent implements OnInit {
 
   }
 
+  getAllCv(){
+    this.dashboardService.getAllCvs().subscribe((cvs: FullCvView[]) => {this.fullCvList = cvs;}, error => {}, () => {
+      this.filterCvAfterSkill();
+    });
+  }
+
+  filterCvAfterSkill(){
+    this.filteredCvList = [];
+
+    var skillreqs = this.filterSkillList.length;
+
+    for(let cv of this.fullCvList){
+      var cvSkillReq = 0;
+      for(let skillReq of this.filterSkillList){
+        for(let currentSkill of cv.fullSkillList){
+          if(currentSkill.name == skillReq.name){
+
+
+            if(currentSkill.exp1){
+              if(skillReq.exp1 || skillReq.exp2 || skillReq.exp3){
+                cvSkillReq += 1;
+                console.log("exp1 true");
+              }
+            }else if (currentSkill.exp2){
+              if(skillReq.exp2 || skillReq.exp3){
+                cvSkillReq += 1;
+                console.log("exp2 true");
+              }
+            }else if (currentSkill.exp3){
+              if(skillReq.exp3){
+                cvSkillReq += 1;
+                console.log("exp3 true");
+              }
+            }
+
+
+
+
+          }
+        }
+      }
+      if(skillreqs == cvSkillReq){
+        this.filteredCvList.push(cv);
+      }
+    }
+  }
 
 }

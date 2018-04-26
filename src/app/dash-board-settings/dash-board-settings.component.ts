@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingServiceService} from "./service/setting-service.service";
 import {Skill} from "../objects/skill";
+import {falseIfMissing} from "protractor/built/util";
 
 @Component({
   selector: 'app-dash-board-settings',
@@ -23,19 +24,36 @@ export class DashBoardSettingsComponent implements OnInit {
   skillListSeven: Skill[];
   skillListEight: Skill[];
 
+  viewListOne: boolean = true;
+  viewListTwo: boolean = true;
+  viewListThree: boolean = true;
+  viewListFour: boolean = true;
+  viewListFive: boolean = true;
+  viewListSix: boolean = true;
+  viewListSeven: boolean = true;
+  viewListEight: boolean = true;
 
-  constructor(private settingService: SettingServiceService) {
-  }
+  constructor(private settingService: SettingServiceService) {}
 
   ngOnInit() {
     this.loadAllSkill();
+    this.viewListOne = true;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
   }
 
   submitSkill() {
-    this.settingService.insertSkill(this.model).subscribe();
-    this.model = {};
-    location.reload();
-    this.loadAllSkill();
+    this.settingService.insertSkill(this.model).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.loadAllSkill();
+      this.model.name = "";
+    });
   }
 
   loadAllSkill() {
@@ -90,10 +108,156 @@ export class DashBoardSettingsComponent implements OnInit {
     });
   }
 
-  deleteSkillById(skill) {
-    this.settingService.deleteSkillById(skill.id).subscribe();
-    location.reload();
-    this.loadAllSkill();
+  deleteSkillByIdOne(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListOne.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdTwo(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListTwo.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdThree(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListThree.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdFour(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListFour.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdFive(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListFive.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdSix(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListSix.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdSeven(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListSeven.splice(indexCount, 1);
+    });
+  }
+
+  deleteSkillByIdEight(skill, indexCount) {
+    this.settingService.deleteSkillById(skill.id).subscribe(() => {}, error => {
+      console.log("Server Error");
+    }, () => {
+      this.skillListEight.splice(indexCount, 1);
+    });
+  }
+
+  pageOne(){
+    this.viewListOne = true;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageTwo(){
+    this.viewListOne = false;
+    this.viewListTwo = true;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageThree(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = true;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageFour(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = true;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageFive(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = true;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageSix(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = true;
+    this.viewListSeven = false;
+    this.viewListEight = false;
+  }
+
+  pageSeven(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = true;
+    this.viewListEight = false;
+  }
+
+  pageEight(){
+    this.viewListOne = false;
+    this.viewListTwo = false;
+    this.viewListThree = false;
+    this.viewListFour = false;
+    this.viewListFive = false;
+    this.viewListSix = false;
+    this.viewListSeven = false;
+    this.viewListEight = true;
   }
 
 }

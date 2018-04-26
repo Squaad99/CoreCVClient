@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes} from "@angular/router";
 import { CvFormComponent } from './cv-form/cv-form.component';
-import { HttpModule } from '@angular/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { DashBoardSettingsComponent } from './dash-board-settings/dash-board-settings.component';
@@ -26,6 +25,9 @@ import {AuthService} from "./login/service/auth.service";
 import {UserService} from "./login/service/user.service";
 import {AuthenticationInterceptor} from "./sercurity/authentication.interceptor";
 import {AuthenticationGuard} from "./sercurity/authentication.guard";
+import { UserSettingComponent } from './user-setting/user-setting.component';
+import {UserSettingService} from "./user-setting/service/user-setting.service";
+import { TablePipe } from './advance-search/table.pipe';
 
 
 const appRoutes:Routes = [
@@ -48,7 +50,9 @@ const appRoutes:Routes = [
     DashBoardSettingsComponent,
     SelectCountryComponent,
     TitleSettingsComponent,
-    AdvanceSearchComponent
+    AdvanceSearchComponent,
+    UserSettingComponent,
+    TablePipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -67,8 +71,11 @@ const appRoutes:Routes = [
     CvService,
     SettingServiceService,
     TitleSettingsService,
-    UserService, HttpModule, SelectCountryComponent,DashboardService, AuthService, AuthenticationGuard],
-  bootstrap: [AppComponent]
+    UserService, SelectCountryComponent,DashboardService, AuthService, AuthenticationGuard, UserSettingService],
+  bootstrap: [AppComponent],
+  exports: [
+    TablePipe
+  ]
 })
 export class AppModule {
 

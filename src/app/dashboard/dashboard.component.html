@@ -66,11 +66,11 @@
         </div>
 
 
-        <div class="col mt-2  mr-4" style="min-height: 38vh">
+        <div class="col mt-2  ml-4" style="min-height: 38vh">
 
-          <input type="text" placeholder="Search" [(ngModel)]="filter1" class="mt-1 mr-3 form-control w-25">
+          <input type="text" placeholder="Search" [(ngModel)]="filter1" class="form-control w-25">
 
-          <table class="table border skillTable m-3">
+          <table class="table border skillTable mt-2">
             <thead>
             <tr>
               <th class="text-center w-50">Skill</th>
@@ -114,8 +114,8 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active container" id="home">
-              <span class="float-right" style="font-size: 14px; margin-top: -2.4%">{{this.ppCharCount}}/500</span>
-              <textarea class="form-control mt-3" style="min-height: 22vh" name="comment" #comment="ngModel" [(ngModel)]="model.comment" (ngModelChange)="setPpCharCount()" maxlength="500">{{model.comment}}</textarea>
+              <span class="float-right" style="font-size: 14px; margin-top: -2.4%">{{this.ppCharCount}}/1700</span>
+              <textarea class="form-control mt-3" style="min-height: 22vh" name="comment" #comment="ngModel" [(ngModel)]="model.comment" (ngModelChange)="setPpCharCount()" maxlength="1700">{{model.comment}}</textarea>
               <button class="btn btn-primary mt-2 mb-2" style="float: right" [disabled]="!cvSelected" (click)="updateProfessionalProfile()">Save</button>
             </div>
 
@@ -145,7 +145,7 @@
                   </table>
                 </div>
                 <div class="col">
-                  <span class="float-right" style="font-size: 14px;  margin-top: -5%">{{this.eduCharCount}}/500</span>
+                  <span class="float-right" style="font-size: 14px;  margin-top: -5%">{{this.eduCharCount}}/180</span>
                   <textarea class="form-control" style="min-height: 22vh" name="eduComment" #eduComment="ngModel" [(ngModel)]="selectedEducation.comment" (ngModelChange)="setEduCharCount()" maxlength="180">{{selectedEducation.comment}}</textarea>
                   <button class="btn btn-primary float-right mt-2 mb-2" [disabled]="!eduSelected" (click)="updateEduComment()">Save</button>
                 </div>
@@ -176,7 +176,7 @@
             </table>
           </div>
           <div class="col">
-            <span class="float-right" style="font-size: 14px; margin-top: -5%">{{this.workCharCount}}/500</span>
+            <span class="float-right" style="font-size: 14px; margin-top: -5%">{{this.workCharCount}}/180</span>
             <textarea class="form-control" style="min-height: 22vh" name="workComment" #workComment="ngModel" [(ngModel)]="selectedWorkplace.comment" (ngModelChange)="setWorkCharCount()" maxlength="180">{{selectedWorkplace.comment}}</textarea>
             <button class="btn btn-primary float-right mt-2 mb-2" [disabled]="!workSelected" (click)="updateWorkComment()">Save</button>
           </div>

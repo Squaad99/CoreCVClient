@@ -69,6 +69,11 @@ export class CvFormComponent implements OnInit {
   }
 
   addEducation() {
+    if(this.educationList.length > 15){
+      this.modalMessage = "Education limit reached.";
+      this.showInfoModal();
+      return;
+    }
     this.educationList.push({id: null, name: "", start: "", end: "", comment: ""});
   }
 
@@ -78,6 +83,11 @@ export class CvFormComponent implements OnInit {
 
   addWorkplace() {
     this.workplaceList.push({id: null, name: "", start: "", end: "", comment: ""});
+    if(this.workplaceList.length > 15){
+      this.modalMessage = "Workplace limit reached.";
+      this.showInfoModal();
+      return;
+    }
   }
 
   removeWorkplace(index) {
@@ -340,7 +350,7 @@ export class CvFormComponent implements OnInit {
     for(let skill of this.doneSkillList){
       if(skill.exp1 == false && skill.exp2 == false && skill.exp3 == false){
         this.modalMessage = "Please enter experience for " + skill.name+".";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }
     }
@@ -354,19 +364,19 @@ export class CvFormComponent implements OnInit {
     for(let edu of this.educationList){
       if(edu.name.length < 1){
         this.modalMessage = "Please enter name for education.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(edu.start.length < 1){
         this.modalMessage = "Please enter start for education.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(edu.end.length < 1){
         this.modalMessage = "Please enter end for education.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(edu.start > edu.end){
         this.modalMessage = "Start year must be earlier than end year, education:" + edu.name;
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }
     }
@@ -380,19 +390,19 @@ export class CvFormComponent implements OnInit {
     for(let workplace of this.workplaceList){
       if(workplace.name.length < 1){
         this.modalMessage = "Please enter name for workplace.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(workplace.start.length < 1){
         this.modalMessage = "Please enter start for workplace.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(workplace.end.length < 1){
         this.modalMessage = "Please enter end for workplace.";
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }else if(workplace.start > workplace.end){
         this.modalMessage = "Start year must be earlier than end year, workplace:" + workplace.name;
-        this.showValidationModal();
+        this.showInfoModal();
         return false;
       }
     }
@@ -437,8 +447,6 @@ export class CvFormComponent implements OnInit {
     const files = event.target.files;
     const file = files[0];
 
-    console.log(file);
-
     if(file.type == "image/jpeg"){
       this.fileFormat = true;
     }else {
@@ -469,7 +477,7 @@ export class CvFormComponent implements OnInit {
   acceptedTerms: boolean = false;
 
   @ViewChild('validationModal') modal:ElementRef;
-  showValidationModal(){
+  showInfoModal(){
     $(this.modal.nativeElement).modal({view: 'show'});
   }
 
@@ -506,5 +514,6 @@ export class CvFormComponent implements OnInit {
   goToWorkIt(){
     window.location.href='http://www.work-it.se/';
   }
+
 
 }

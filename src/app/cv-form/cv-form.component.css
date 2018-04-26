@@ -2,7 +2,7 @@
   width: 100%;
   min-width: 1600px;
   height: 100%;
-  background: lightgrey;
+  background: #bfbfbf;
   padding: 5%;
 }
 
@@ -14,9 +14,12 @@
   background-color: white;
   width: 60%;
   min-width: 800px;
-  border: 3px solid black;
+  border: 2px solid black;
   border-radius: 24px;
   padding: 3% 8%;
+
+  box-shadow: 3px 5px #888888;
+
 }
 
 .header{
@@ -37,6 +40,7 @@
 
 .spanClick{
   cursor: pointer;
+  user-select: none;
 }
 
 .radioButton{

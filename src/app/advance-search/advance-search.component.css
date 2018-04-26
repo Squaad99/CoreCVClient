@@ -1,11 +1,8 @@
-.cnt{
-  width: 80vw;
-  height: 50%;
-  margin-top: 10vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
-}
 
+.container-fluid{
+  padding: 10%;
+  padding-top: 5%;
+}
 
 .filterBody{
   max-height: 14.5vh;
@@ -38,19 +35,19 @@
 }
 
 .emptyTableDiv{
-  height: 14.5vh;
+  height: 100%;
   text-align: center;
-  line-height: 12vh;
   font-weight: bold;
   text-shadow: 1px 1px gray;
 }
 
 .clickableSpan{
+  user-select: none;
   cursor: pointer;
 }
 
 
-tbody, tr{ display: block; }
+tbody, tr{display: block;}
 
 tbody{font-size: 0.9vw;}
 
