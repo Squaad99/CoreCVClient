@@ -19,9 +19,9 @@
           </thead>
           <tbody style="height: 74vh">
           <tr *ngFor="let cv of fullCvList | filter:filter;" (click)="selectedCv(cv)" class="clickable-row">
-            <td style="width: 28%">{{cv.fullName}}</td>
+            <td style="width: 28%"><input class="w-100 form-control" value="{{cv.fullName}}"></td>
             <td style="width: 20%">{{cv.title}}</td>
-            <td style="width: 32%">{{cv.email}}</td>
+            <td style="width: 32%"><input class="w-100 form-control" value="{{cv.email}}"></td>
             <td style="width: 20%">{{cv.posted}}</td>
           </tr>
           </tbody>
@@ -132,9 +132,9 @@
                       <th style="width: 30%">End</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height: 20vh">
                     <tr *ngFor="let edu of model.educationList" (click)="setSelectedEducation(edu)" class="border">
-                      <td style="width: 40%">{{edu.name}}</td>
+                      <td style="width: 40%"><input class="w-100 form-control" value="{{edu.name}}" readonly></td>
                       <td style="width: 30%">{{edu.start}}</td>
                       <td style="width: 30%">{{edu.end}}</td>
                     </tr>
@@ -163,9 +163,9 @@
                 <th style="width: 30%">End</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody style="height: 20vh">
               <tr *ngFor="let work of model.workPlaceList" (click)="setSelectedWorkPlace(work)" class="border">
-                <td style="width: 40%">{{work.name}}</td>
+                <td style="width: 40%"><input class="w-100 form-control" value="{{work.name}}" readonly></td>
                 <td style="width: 30%">{{work.start}}</td>
                 <td style="width: 30%">{{work.end}}</td>
               </tr>

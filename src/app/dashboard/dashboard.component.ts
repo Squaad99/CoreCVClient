@@ -5,6 +5,8 @@ import * as jsPDF from 'jspdf';
 import {Education} from "../objects/education";
 import {WorkPlace} from "../objects/workPlace";
 import {VALUE_EXP1, VALUE_EXP2, VALUE_EXP3} from "../api.values";
+import {Config} from "protractor";
+import {ProfileImage} from "../objects/profileImage";
 
 declare let $: any;
 
@@ -50,7 +52,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.updateProfessionalProfile(this.model).subscribe(() => {
     }, error => {}, () => {
       this.infoModalHeader = "Updated!";
-      this.infoModalMessage = "Your Professional profile has been updated!"
+      this.infoModalMessage = "Your Professional profile has been updated!";
       this.showInfoModal();
     });
   }
@@ -59,7 +61,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.updateProfessionalProfile(this.model).subscribe(() => {
     }, error => {}, () => {
       this.infoModalHeader = "Updated!";
-      this.infoModalMessage = "Your Professional profile has been updated!"
+      this.infoModalMessage = "Your Professional profile has been updated!";
       this.showInfoModal();
     });
   }
@@ -68,7 +70,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.updateEduComment(this.selectedEducation).subscribe(() => {
     }, error => {}, () => {
       this.infoModalHeader = "Updated!";
-      this.infoModalMessage = "Your Education comment has been updated!"
+      this.infoModalMessage = "Your Education comment has been updated!";
       this.showInfoModal();
     });
   }
@@ -77,7 +79,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.updateWorkComment(this.selectedWorkplace).subscribe(() => {
     }, error => {}, () => {
       this.infoModalHeader = "Updated!";
-      this.infoModalMessage = "Your Workplace comment has been updated!"
+      this.infoModalMessage = "Your Workplace comment has been updated!";
       this.showInfoModal();
     });
   }
@@ -91,7 +93,6 @@ export class DashboardComponent implements OnInit {
   selectedCv(cv) {
     this.cvSelected = true;
     this.model = cv;
-
     this.setPpCharCount();
 
     if(this.model.educationList.length > 0){
@@ -111,6 +112,8 @@ export class DashboardComponent implements OnInit {
       this.selectedWorkplace = {id: null, name: "", start: "", end: "", comment: ""};
       this.workSelected = false;
     }
+
+    this.setProfileImage(this.model.id);
   }
 
   setSelectedEducation(edu){
@@ -147,7 +150,7 @@ export class DashboardComponent implements OnInit {
     pdf.line(20,278,190,278);
 
     pdf.setFontSize(14);
-    pdf.setTextColor(46, 184, 46);
+    pdf.setTextColor(20, 82, 20);
     pdf.setFontType("bold");
     pdf.text("Work IT", 160,10);
 
@@ -223,7 +226,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.lineHeight += 20;
-    if(this.lineHeight > 200){
+    if(this.lineHeight > 240){
       pdf.addPage();
       pdf.setFontSize(10);
       pageNumber++;
@@ -238,6 +241,16 @@ export class DashboardComponent implements OnInit {
 
     pdf.setFontSize(12);
     for(let skill of this.model.fullSkillList){
+
+      if(this.lineHeight > 250){
+        pdf.addPage();
+        pdf.setFontSize(10);
+        pageNumber++;
+        pdf.text(pageNumber+"",105, 290);
+        this.setWorkItPage(pdf);
+        this.lineHeight = 32;
+      }
+
       this.lineHeight += 10;
       pdf.text(skill.name, 20, this.lineHeight);
 
@@ -272,6 +285,14 @@ export class DashboardComponent implements OnInit {
 
     for(let edu of this.model.educationList){
 
+      if(this.lineHeight > 250){
+        pdf.addPage();
+        pdf.setFontSize(10);
+        pageNumber++;
+        pdf.text(pageNumber+"",105, 290);
+        this.setWorkItPage(pdf);
+        this.lineHeight = 22;
+      }
       pdf.setFontSize(14);
       this.lineHeight += 10;
       pdf.text(edu.name + " " + edu.start + " - " + edu.end, 20, this.lineHeight);
@@ -289,7 +310,7 @@ export class DashboardComponent implements OnInit {
       for(let row of splitTitle){
         this.lineHeight += 4;
         pdf.text(row, 20, this.lineHeight);
-        if(this.lineHeight > 270){
+        if(this.lineHeight > 264){
           pdf.addPage();
           pdf.setFontSize(10);
           pageNumber++;
@@ -320,6 +341,8 @@ export class DashboardComponent implements OnInit {
 
     for(let workPlace of this.model.workPlaceList){
 
+
+
       pdf.setFontSize(14);
       this.lineHeight += 10;
       pdf.text(workPlace.name + " " + workPlace.start + " - " + workPlace.end, 20, this.lineHeight);
@@ -336,7 +359,7 @@ export class DashboardComponent implements OnInit {
       for(let row of splitWorkPlace){
         this.lineHeight += 4;
         pdf.text(row, 20, this.lineHeight);
-        if(this.lineHeight > 270){
+        if(this.lineHeight > 264){
           pdf.addPage();
           pdf.setFontSize(10);
           pageNumber++;
@@ -396,7 +419,6 @@ export class DashboardComponent implements OnInit {
   @ViewChild('infoModal') modal:ElementRef;
   showInfoModal(){
     $(this.modal.nativeElement).modal('show');
-
   }
 
   @ViewChild('confirmationModal') confirmationModal:ElementRef;
@@ -437,13 +459,18 @@ export class DashboardComponent implements OnInit {
 
   workCharCount: Number = 0;
 
-  setWorkCharCount(){
-    if(this.model.comment != null){
+  setWorkCharCount() {
+    if (this.model.comment != null) {
       this.workCharCount = this.selectedWorkplace.comment.length;
-    }else {
+    } else {
       this.workCharCount = 0;
     }
   }
 
+  setProfileImage(id){
+    this.dashboardService.getCvImageBase64(id).subscribe((image: ProfileImage) => {
+      this.model.imageBase64 = image.base64Image;
+    }, error => {console.log(error);}, () => {console.log("Completed")});
+  }
 
 }

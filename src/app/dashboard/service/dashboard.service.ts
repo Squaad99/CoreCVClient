@@ -14,12 +14,11 @@ export class DashboardService {
   }
 
   updateProfessionalProfile(cv: FullCV){
-   return this.http.put("/api/cv", cv)
+   return this.http.put("/api/cv", cv);
   }
 
   updateEduComment(edu: Education){
     return this.http.put("/api/edu", edu);
-
   }
 
   updateWorkComment(work: WorkPlace){
@@ -28,6 +27,10 @@ export class DashboardService {
 
   deleteCvById(cvId: number) {
     return this.http.delete("/api/cv/" + cvId);
+  }
+
+  getCvImageBase64(cvId: number){
+    return this.http.get("/api/cv/cvImage/" + cvId);
   }
 
 }

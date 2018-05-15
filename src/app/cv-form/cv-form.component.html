@@ -1,10 +1,14 @@
-<div class="fullCon">
+<div class="fullCon bg-success">
 
 <form id="CVForm" (ngSubmit)="submitCv()" #cvForm="ngForm">
 
+  <img class="logoPicture" src="./assets/res/logo.png">
+
   <label class="header">Submit CV</label>
 
-  <img class="logoPicture" src="./assets/res/logo.png">
+  <label>Welcome to submit your CV/Summary to us at Work-IT. We will handle your resume with privacy and never disclose personal information. When we introduce you to a customer, only your name will be displayed and you will always be informed about when this happens.</label>
+
+  <p>Please fill out all fields marked * before you can submit.</p>
 
   <label class="subHeader">Personal Info</label>
 
@@ -65,10 +69,10 @@
   <div class="form-group">
     <label for="inputEmail">Email*</label>
     <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" #email="ngModel"
-           [(ngModel)]="model.email" [ngClass]="{ 'is-invalid' : email.errors && (email.dirty || email.touched), 'is-valid' : !email.errors}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" max="50">
+           [(ngModel)]="model.email" [ngClass]="{ 'is-invalid' : email.errors && (email.dirty || email.touched), 'is-valid' : !email.errors}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
-      Email is required.
+      Email must be valid format!
     </div>
   </div>
 
@@ -366,7 +370,7 @@
   <div class="form-group">
     <label>Zip code*</label>
     <input type="text" class="form-control" name="zipCode" #zipCode="ngModel" [(ngModel)]="model.zipCode" [ngClass]="{ 'is-invalid' : zipCode.errors && (zipCode.dirty || zipCode.touched), 'is-valid' : !zipCode.errors}"
-           required pattern="[0-9]{5}">
+           required pattern="[0-9]{5}" maxlength="5">
     <div *ngIf="zipCode.errors && (zipCode.dirty || zipCode.touched)" class="alert alert-danger">
 
       <div *ngIf="lastName.errors.required">
@@ -428,7 +432,7 @@
 
   </div>
 
-  <label id="label1"  class="subHeader">Skills</label>
+  <label id="label1"  class="subHeader">Skills<span class="insideSpan">(click to expand)</span></label>
 
   <!--1, Programming/Development -->
   <div class="form-group">
@@ -680,10 +684,7 @@
     </div>
   </div>
 
-  <label id="eduHeader" class="subHeader">Education<span id="toolTipBox1" class="toolTipBox">Education: </span>
-    <span class="btn btn-success" (click)="addEducation()" style="margin-left: 1vh">+</span>
-  </label>
-
+  <label id="eduHeader" class="subHeader">Education<span class="btn btn-success" (click)="addEducation()" style="margin-left: 1vh">Add</span></label>
 
  <!--Education-->
   <div class="form-group">
@@ -692,8 +693,8 @@
 
         <span class="float-right spanClick" (click)="removeEducation(indexCount)">X</span>
 
-        <label class="minorHeader" style="display: block">Name*</label>
-        <input type="text" class="form-control" name="educationName{{indexCount}}" #educationName{{indexCount}}="ngModel" [(ngModel)]="educationList[indexCount].name">
+        <label class="minorHeader" style="display: block">Name of education*</label>
+        <input type="text" class="form-control" name="educationName{{indexCount}}" #educationName{{indexCount}}="ngModel" [(ngModel)]="educationList[indexCount].name" maxlength="20">
 
         <label class="minorHeader">Start*</label>
         <select class="form-control w-25" name="educationStart{{indexCount}}" #educationStart{{indexCount}}="ngModel" [(ngModel)]="educationList[indexCount].start">
@@ -705,7 +706,7 @@
           <option *ngFor="let i of YearList">{{i}}</option>
         </select>
 
-        <label class="minorHeader">Comment</label> <span class="float-right">{{educationList[indexCount].comment.length}}/180</span>
+        <label class="minorHeader">Comment/Courses</label> <span class="float-right">{{educationList[indexCount].comment.length}}/180</span>
         <textarea class="form-control" style="min-height: 14vh" name="educationComment{{indexCount}}"
                   #educationComment{{indexCount}}="ngModel"
                   [(ngModel)]="educationList[indexCount].comment" maxlength="180"></textarea>
@@ -714,10 +715,7 @@
     </ul>
   </div>
 
-  <label id="workHeader" class="subHeader">Workplaces<span id="toolTipBox2" class="toolTipBox">Workplace: </span>
-    <span class="btn btn-success" style="margin-left: 1vh" (click)="addWorkplace()">+</span>
-
-  </label>
+  <label id="workHeader" class="subHeader">Workplaces/Assignments<span class="btn btn-success" style="margin-left: 1vh" (click)="addWorkplace()">Add</span></label>
 
   <!--WorkPlaces-->
   <div class="form-group">
@@ -729,7 +727,7 @@
           <label class="minorHeader">Name*</label>
           <input type="text" class="form-control" name="workPlaceName{{indexCount}}"
                  #workPlaceName{{indexCount}}="ngModel"
-                 [(ngModel)]="workplaceList[indexCount].name">
+                 [(ngModel)]="workplaceList[indexCount].name" maxlength="20">
 
             <label class="minorHeader">Start*</label>
             <select class="form-control w-25" name="workPlaceStart{{indexCount}}" #workPlaceStart{{indexCount}}="ngModel"
@@ -746,14 +744,14 @@
           <label class="minorHeader">Comment</label> <span class="float-right">{{workplaceList[indexCount].comment.length}}/180</span>
           <textarea class="form-control" style="min-height: 14vh" name="workPlaceComment{{indexCount}}"
                     #workPlaceComment{{indexCount}}="ngModel"
-                    [(ngModel)]="workplaceList[indexCount].comment"></textarea>
+                    [(ngModel)]="workplaceList[indexCount].comment" maxlength="180"></textarea>
       </li>
     </ul>
   </div>
 
   <div class="form-group">
     <div class="from-inline mb-1">
-      <label id="professionalHeader" class="subHeader" style="display: inline">Professional profile<span id="toolTipBox3" class="toolTipBox">Professional profile: </span></label> <span class="float-right">{{this.ppLength}}/1500</span>
+      <label id="professionalHeader" class="subHeader" style="display: inline">Professional profile<span class="insideSpan"> (goal, focus, personal info)</span></label> <span class="float-right">{{this.ppLength}}/1500</span>
     </div>
     <textarea type="text" class="form-control" style="min-height: 15vh" name="comment" #comment="ngModel"
               [(ngModel)]="model.comment" maxlength="1500"
