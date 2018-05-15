@@ -100,9 +100,7 @@ export class AdvanceSearchComponent implements OnInit {
     this.filteredCvList = [];
 
     var allFilterSize = this.filterSkillList.length;
-
-
-
+    
     for(let cv of this.fullCvList){
 
       var cvSkillReqTotal = 0;
@@ -119,7 +117,7 @@ export class AdvanceSearchComponent implements OnInit {
         }else if(skillReqItem.exp3 == true){
           cvSkillReq = 3;
         }
-        
+
         for(let currentSkill of cv.fullSkillList){
 
           if(currentSkill.name == skillReqItem.name){
